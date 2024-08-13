@@ -2,7 +2,7 @@
 
 <img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028774381807053853.jpg" width="320">
 
-## NETMIKO
+## SNMP
 
 <br/>
 Netmiko é uma biblioteca Python que facilita a conexão e interação com dispositivos de rede, como roteadores e switches. Ele se baseia na biblioteca Paramiko para realizar conexões SSH.
@@ -12,11 +12,24 @@ Basicamente, o Netmiko facilitar a configuração de vários dispositivos, permi
 A biblioteca fornece suporte a vários fabricantes e modelos de dispositivos de rede, como Cisco IOS, Juniper, HP e outros. Ele fornece classes e métodos específicos para cada tipo de dispositivo, facilitando a interação.
 
 <br/>
-
+Primeiramente, vamos instalar o protocolo SNMP em uma distribuição Linux. Neste exemplo, estou usando o Kali, mas os comandos são bastante semelhantes aos do Ubuntu, por exemplo.
 ## Instalar
 
 ```
-$ pip install netmiko
+$ sudo apt update
+$ sudo apt install snmp snmpd
+
+## Após a instalação, você pode iniciar e verificar o status do serviço SNMPD (demon SNMP) com os seguintes comandos:
+
+Para iniciar o serviço SNMPD:
+$ sudo systemctl status snmpd
+Para verificar o status do serviço:
+$ sudo systemctl status snmpd
+
+Configuração (opcional): Para configurar o SNMP de acordo com as suas necessidades, você pode editar o arquivo de configuração localizado em /etc/snmp/snmpd.conf.
+
+Lembre-se de que algumas configurações podem exigir que você reinicie o serviço para que as alterações tenham efeito:
+$  sudo systemctl restart snmpd
 
 ```
 
