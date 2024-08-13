@@ -1,6 +1,6 @@
-<h1 align ="center"> Automação com Netmiko ⚙</h1>
+<h1 align ="center"> SNMP ⚙</h1>
 
-<img src="/img/img.jpg" width="320">
+<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028774381807053853.jpg" width="320">
 
 ## NETMIKO
 
