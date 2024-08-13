@@ -22,7 +22,7 @@ $ sudo apt update
 $ sudo apt install snmp snmpd
 ```
 
-## Após a instalação, você pode iniciar e verificar o status do serviço SNMPD (demon SNMP) com os seguintes comandos:
+ Após a instalação, você pode iniciar e verificar o status do serviço SNMPD (demon SNMP) com os seguintes comandos:
 
 Para iniciar o serviço SNMPD:
 ```
@@ -40,9 +40,11 @@ Lembre-se de que algumas configurações podem exigir que você reinicie o servi
 ```
 $  sudo systemctl restart snmpd
 ```
+Agora vamos acessar o arquivo de configuração que está localizado em /etc/snmp/snmpd.conf.
 
+<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028516752488770994.jpg" width="320">
 ```
-
+Esta imagem ilustra como configurar o SNMP. Precisamos criar duas comunidades: uma destinada à leitura das informações e outra para permitir a escrita. Os nomes dessas comunidades podem ser definidos conforme sua preferência.
 - <a href="https://pypi.org/project/netmiko/"> Documentação </a>
 
 ## Também a opção de criar um ambiente virtual
