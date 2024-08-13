@@ -13,23 +13,33 @@ A biblioteca fornece suporte a vários fabricantes e modelos de dispositivos de 
 
 <br/>
 Primeiramente, vamos instalar o protocolo SNMP em uma distribuição Linux. Neste exemplo, estou usando o Kali, mas os comandos são bastante semelhantes aos do Ubuntu, por exemplo.
-## Instalar
+
 
 ```
 $ sudo apt update
+```
+```
 $ sudo apt install snmp snmpd
+```
 
 ## Após a instalação, você pode iniciar e verificar o status do serviço SNMPD (demon SNMP) com os seguintes comandos:
 
 Para iniciar o serviço SNMPD:
+```
 $ sudo systemctl status snmpd
+```
+
 Para verificar o status do serviço:
+```
 $ sudo systemctl status snmpd
+```
 
 Configuração (opcional): Para configurar o SNMP de acordo com as suas necessidades, você pode editar o arquivo de configuração localizado em /etc/snmp/snmpd.conf.
 
 Lembre-se de que algumas configurações podem exigir que você reinicie o serviço para que as alterações tenham efeito:
+```
 $  sudo systemctl restart snmpd
+```
 
 ```
 
