@@ -1,6 +1,6 @@
 <h1 align ="center"> SNMP ⚙</h1>
 
-<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028774381807053853.jpg" width="320">
+<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/WhatsApp%20Image%202024-08-14%20at%2015.33.44.jpeg" width="450">
 
 ## SNMP
 
