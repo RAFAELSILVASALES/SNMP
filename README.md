@@ -5,10 +5,7 @@
 ## SNMP
 
 <br/>
-Netmiko é uma biblioteca Python que facilita a conexão e interação com dispositivos de rede, como roteadores e switches. Ele se baseia na biblioteca Paramiko para realizar conexões SSH.
-
-Basicamente, o Netmiko facilitar a configuração de vários dispositivos, permitindo que você envie comandos, leia saídas e faça alterações de configuração.
-
+O protocolo SNMP (Simple Network Management Protocol) é um protocolo amplamente utilizado para gerenciar e monitorar dispositivos de rede, como roteadores, switches, servidores, impressoras, e outros dispositivos conectados a uma rede IP. Ele permite que administradores de rede coletem informações sobre o desempenho, configurem dispositivos e diagnostiquem problemas de maneira centralizada.
 
 
 <br/>
@@ -46,14 +43,15 @@ Agora vamos acessar o arquivo de configuração que está localizado em /etc/snm
 ```
 Esta imagem ilustra como configurar o SNMP. Precisamos criar duas comunidades: uma destinada à leitura das informações e outra para permitir a escrita. Os nomes dessas comunidades podem ser definidos conforme sua preferência.
 
-# Configurar o switch 
 
-# Configurar a Comunidade SNMP
+
+ Configurar a Comunidade SNMP
 A "comunidade SNMP" é um nome de grupo que age como uma senha, permitindo que o dispositivo seja consultado ou configurado remotamente.
 
 Leitura-Escrita (rw): Permite tanto a consulta quanto a configuração do dispositivo.
 Somente Leitura (ro): Permite apenas a consulta.
 
+ Configurar o switch 
 
 Exemplo de configuração para comunidade somente leitura (ro):
 ```
@@ -64,8 +62,10 @@ Exemplo de configuração para comunidade leitura-escrita (rw):
 ```
 $ Switch(config)# snmp-server community prfoitecRW rw
 ```
-# 3. Configurar Host de Destino para Traps SNMP
+ Configurar Host de Destino para Traps SNMP
 Os "Traps SNMP" são mensagens enviadas pelo switch para informar um sistema de gerenciamento de rede (NMS) sobre eventos importantes.
+
+
 ```
 $ Switch(config)# snmp-server host 192.168.1.100 version 2c profitecRW
 
@@ -129,7 +129,7 @@ Descrição: Permite monitorar a utilização da CPU em dispositivos Cisco.
 Como Usar esses OIDs
 Esses OIDs podem ser usados com comandos SNMP como snmpget, snmpwalk, ou ferramentas de monitoramento de rede como Nagios, Zabbix, ou Cacti
 
-# Exemplo de uma MIB
+ Exemplo de uma MIB
 
 <img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028516752488770993.jpg" width="500">
 
