@@ -1,6 +1,6 @@
 <h1 align ="center"> SNMP ⚙</h1>
 
-<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/WhatsApp%20Image%202024-08-14%20at%2015.33.44.jpeg" width="450">
+<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/WhatsApp%20Image%202024-08-14%20at%2015.33.44.jpeg" width="500">
 
 ## SNMP
 
@@ -9,7 +9,7 @@ Netmiko é uma biblioteca Python que facilita a conexão e interação com dispo
 
 Basicamente, o Netmiko facilitar a configuração de vários dispositivos, permitindo que você envie comandos, leia saídas e faça alterações de configuração.
 
-A biblioteca fornece suporte a vários fabricantes e modelos de dispositivos de rede, como Cisco IOS, Juniper, HP e outros. Ele fornece classes e métodos específicos para cada tipo de dispositivo, facilitando a interação.
+
 
 <br/>
 Primeiramente, vamos instalar o protocolo SNMP em uma distribuição Linux. Neste exemplo, estou usando o Kali, mas os comandos são bastante semelhantes aos do Ubuntu, por exemplo.
@@ -42,120 +42,95 @@ $  sudo systemctl restart snmpd
 ```
 Agora vamos acessar o arquivo de configuração que está localizado em /etc/snmp/snmpd.conf.
 
-<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028516752488770994.jpg" width="320">
+<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028516752488770994.jpg" width="500">
 ```
 Esta imagem ilustra como configurar o SNMP. Precisamos criar duas comunidades: uma destinada à leitura das informações e outra para permitir a escrita. Os nomes dessas comunidades podem ser definidos conforme sua preferência.
-- <a href="https://pypi.org/project/netmiko/"> Documentação </a>
 
-## Também a opção de criar um ambiente virtual
+# Configurar o switch 
 
-Para Windows:
-Digite no Terminal
+# Configurar a Comunidade SNMP
+A "comunidade SNMP" é um nome de grupo que age como uma senha, permitindo que o dispositivo seja consultado ou configurado remotamente.
+
+Leitura-Escrita (rw): Permite tanto a consulta quanto a configuração do dispositivo.
+Somente Leitura (ro): Permite apenas a consulta.
+
+
+Exemplo de configuração para comunidade somente leitura (ro):
+```
+$ Switch(config)# snmp-server community prfoitecRO ro
 
 ```
-$ python -m venv   venv
+Exemplo de configuração para comunidade leitura-escrita (rw):
 ```
-
-A ativar o ambiente virtual
-
+$ Switch(config)# snmp-server community prfoitecRW rw
 ```
-$ /venv/Scripts/Activate.ps1
+# 3. Configurar Host de Destino para Traps SNMP
+Os "Traps SNMP" são mensagens enviadas pelo switch para informar um sistema de gerenciamento de rede (NMS) sobre eventos importantes.
 ```
-
-Instalar a biblioteca:
-
-```
-$ pip install netmiko
-
-```
-
-Para Linux:
-Digite no Terminal
-
-```
-$ pip3 install virtualenv
-```
-
-Para verificar a instalação, digite:
-
-```
-$ virtualenv --version
-```
-
-Para criar um ambiente virtual python digite no terminal:
-
-```
-$ virtualenv <venv>
-```
-
-Para ativar o ambiente, digite:
-
-```
-$ cd venv
-$ source bin/activate
+$ Switch(config)# snmp-server host 192.168.1.100 version 2c profitecRW
 
 ```
 
-Instalar a biblioteca:
-
 ```
-$ pip3 install netmiko
+$ Switch(config)# snmp-server host 192.168.1.100 version 2c profitecRO
 
 ```
 
-## Exemplo ----
 
-```py
-from netmiko import ConnectHandler
+A MIB (Management Information Base) é um conjunto de objetos gerenciáveis em uma rede. Cada objeto na MIB é identificado por um OID (Object Identifier), que pode ser usado para monitorar e gerenciar dispositivos de rede como switches Cisco.
 
-- Dicionário para definir os parâmetros do dispositivo
-  device = {
-  'device_type': 'cisco_xe',
-  'ip': '192.168.32.68',
-  'username': 'admin',
-  'password': 'cisco'
-  }
-# Conexão via SSH
-  connect = ConnectHandler(**device)
+Aqui estão alguns OIDs comuns da MIB que você pode usar para monitorar um switch Cisco:
 
-# ConnectHandler(): Esse é o método que inicia uma conexão com o dispositivo.
+1. SysName (Nome do Sistema)
+OID: .1.3.6.1.2.1.1.5
+Descrição: Retorna o nome do dispositivo (hostname).
+2. SysUpTime (Tempo de Atividade do Sistema)
+OID: .1.3.6.1.2.1.1.3
+Descrição: Retorna o tempo desde a última reinicialização do dispositivo.
+3. SysLocation (Localização do Sistema)
+OID: .1.3.6.1.2.1.1.6
+Descrição: Retorna a localização física do dispositivo.
+4. SysContact (Contato do Sistema)
+OID: .1.3.6.1.2.1.1.4
+Descrição: Retorna o contato responsável pelo dispositivo.
+5. ifDescr (Descrição da Interface)
+OID: .1.3.6.1.2.1.2.2.1.2
+Descrição: Retorna a descrição da interface de rede.
+6. ifInOctets (Bytes Recebidos na Interface)
+OID: .1.3.6.1.2.1.2.2.1.10
+Descrição: Retorna o número de bytes recebidos em uma interface de rede.
+7. ifOutOctets (Bytes Enviados na Interface)
+OID: .1.3.6.1.2.1.2.2.1.16
+Descrição: Retorna o número de bytes enviados a partir de uma interface de rede.
+8. ifOperStatus (Status Operacional da Interface)
+OID: .1.3.6.1.2.1.2.2.1.8
+Descrição: Retorna o status operacional da interface (up, down, testing).
+9. ifAdminStatus (Status Administrativo da Interface)
+OID: .1.3.6.1.2.1.2.2.1.7
+Descrição: Retorna o status administrativo da interface (up, down, testing).
+10. dot1dTpFdbAddress (Endereço MAC da Tabela de Bridge)
+OID: .1.3.6.1.2.1.17.4.3.1.1
+Descrição: Retorna os endereços MAC conhecidos pela tabela de bridge do switch.
+11. dot1dTpFdbPort (Porta da Tabela de Bridge)
+OID: .1.3.6.1.2.1.17.4.3.1.2
+Descrição: Retorna a porta correspondente ao endereço MAC na tabela de bridge.
+12. CISCO-CDP-MIB (Informações CDP - Cisco Discovery Protocol)
+OID: .1.3.6.1.4.1.9.9.23
+Descrição: Permite monitorar dispositivos Cisco vizinhos através do CDP.
+13. CISCO-STACK-MIB (Informações de Stack)
+OID: .1.3.6.1.4.1.9.5.1.1
+Descrição: Retorna informações sobre a pilha de dispositivos Cisco, incluindo status e número de unidades na pilha.
+14. CISCO-MEMORY-POOL-MIB (Monitoramento de Memória)
+OID: .1.3.6.1.4.1.9.9.48
+Descrição: Permite monitorar a utilização da memória em dispositivos Cisco.
+15. CISCO-CPU-MIB (Monitoramento de CPU)
+OID: .1.3.6.1.4.1.9.2.1.57
+Descrição: Permite monitorar a utilização da CPU em dispositivos Cisco.
+Como Usar esses OIDs
+Esses OIDs podem ser usados com comandos SNMP como snmpget, snmpwalk, ou ferramentas de monitoramento de rede como Nagios, Zabbix, ou Cacti
 
-print(connect.find_prompt())
+# Exemplo de uma MIB
 
-output = connect.send_command("show ip arp")
+<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028516752488770993.jpg" width="500">
 
-# send_command(): É o método para enviar um comando para o dispositivo.
 
-config_commands = [
-"enable",
-"configure t",
-"line console 0",
-"password cisco",
-"login",
-"exit",
-"enable secret cisco",
-"banner motd # ACESSO PROIBIDO # ",
-"line vty 0 4",
-"password cisco",
-"login ",
-"exit",
-"service password-encryption",
-"security passwords min-length 5",
-"login block-for 120 attempts 3 within 30",
-]
-
-cfg_output = connect.send_config_set(config_commands)
-
-# send_config_set(): Este é um método pode ser usado para enviar uma lista de comandos de configuração para o dispositivo.
-
-print(cfg_output)
-```
-
-## Exemplo:
-
-- [Exemplo Netmiko](readme_ex.md)
-- [Backup](https://github.com/RAFAELSILVASALES/network_automation/blob/main/readme_ex_backup.md)
-
-## Em breve mais conteúdo sobre automação de redes.
-
-##
