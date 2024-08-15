@@ -133,4 +133,6 @@ Esses OIDs podem ser usados com comandos SNMP como snmpget, snmpwalk, ou ferrame
 
 <img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028516752488770993.jpg" width="500">
 
+Capturar de trafego do SNMP 
+<img src="https://github.com/RAFAELSILVASALES/SNMP/blob/main/5028774381807053853.jpg" width="500">
 
