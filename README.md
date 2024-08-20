@@ -55,12 +55,12 @@ Somente Leitura (ro): Permite apenas a consulta.
 
 Exemplo de configuração para comunidade somente leitura (ro):
 ```
-$ Switch(config)# snmp-server community prfoitecRO ro
+$ Switch(config)# snmp-server community profitecRO ro
 
 ```
 Exemplo de configuração para comunidade leitura-escrita (rw):
 ```
-$ Switch(config)# snmp-server community prfoitecRW rw
+$ Switch(config)# snmp-server community profitecRW rw
 ```
  Configurar Host de Destino para Traps SNMP
 Os "Traps SNMP" são mensagens enviadas pelo switch para informar um sistema de gerenciamento de rede (NMS) sobre eventos importantes.
